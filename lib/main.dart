@@ -6,6 +6,7 @@ import 'package:flutter_responsive_web/screen/portfolio/portfolio_screen.dart';
 import 'package:flutter_responsive_web/screen/portfolio_detail/portfolio_detail_screen.dart';
 import 'package:flutter_responsive_web/screen/question/question_screen.dart';
 import 'package:flutter_responsive_web/screen/recurit/recruit_screen.dart';
+import 'package:flutter_responsive_web/util/custom_scroll_behavior.dart';
 import 'package:flutter_responsive_web/util/my_color.dart';
 import 'package:flutter_responsive_web/util/text_util.dart';
 import 'package:flutter_responsive_web/widgets/custom_constraints.dart';
@@ -63,6 +64,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp.router(
       title: "Homepage",
       debugShowCheckedModeBanner: false,
+      scrollBehavior: CustomScrollBehavior(),
       builder: (context, child) {
         return CustomConstraints(
             backgroundColor: Colors.white, maxWidth: 1920, child: child!);
