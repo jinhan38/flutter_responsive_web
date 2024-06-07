@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_responsive_web/model/screen_model.dart';
+import 'package:flutter_responsive_web/widgets/custom_keyboard_listener.dart';
 import 'package:flutter_responsive_web/widgets/footer.dart';
 import 'package:flutter_responsive_web/widgets/menu/menu.dart';
 import 'package:flutter_responsive_web/widgets/page_drawer.dart';
 
-class CommonScaffold extends StatelessWidget {
+class CommonScaffold extends StatefulWidget {
   const CommonScaffold({
     required this.currentIndex,
     required this.screenModel,
     required this.children,
     this.black = true,
-    this.horizontalPadding =0,
+    this.horizontalPadding = 0,
     super.key,
   });
 
@@ -21,20 +22,44 @@ class CommonScaffold extends StatelessWidget {
   final double horizontalPadding;
 
   @override
+  State<CommonScaffold> createState() => _CommonScaffoldState();
+}
+
+class _CommonScaffoldState extends State<CommonScaffold> {
+  late final ScrollController scrollController;
+
+  @override
+  void initState() {
+    scrollController = ScrollController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    children.add(const Footer());
+    widget.children.add(const Footer());
     return Scaffold(
       endDrawer: PageDrawer(
-        currentIndex: currentIndex,
-        tablet: screenModel.tablet,
+        currentIndex: widget.currentIndex,
+        tablet: widget.screenModel.tablet,
       ),
       body: Stack(
         children: [
           Positioned.fill(
-            child: SingleChildScrollView(
-              padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-              child: Column(
-                children: children,
+            child: CustomKeyboardListener(
+              scrollController: scrollController,
+              child: SingleChildScrollView(
+                controller: scrollController,
+                padding:
+                    EdgeInsets.symmetric(horizontal: widget.horizontalPadding),
+                child: Column(
+                  children: widget.children,
+                ),
               ),
             ),
           ),
@@ -43,9 +68,9 @@ class CommonScaffold extends StatelessWidget {
             top: 0,
             right: 0,
             child: Menu(
-              currentIndex: currentIndex,
-              screenModel: screenModel,
-              black: black,
+              currentIndex: widget.currentIndex,
+              screenModel: widget.screenModel,
+              black: widget.black,
             ),
           ),
         ],
