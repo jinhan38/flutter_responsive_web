@@ -14,6 +14,15 @@ class PortfolioDetailScreen extends StatefulWidget {
 }
 
 class _PortfolioDetailScreenState extends State<PortfolioDetailScreen> {
+  final pageController = PageController();
+  int currentIndex = 0;
+
+  @override
+  void dispose() {
+    pageController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScreenLayoutBuilder(
@@ -48,10 +57,79 @@ class _PortfolioDetailScreenState extends State<PortfolioDetailScreen> {
                   ),
                 ),
                 Expanded(
-                  child: PageView(
+                  child: Stack(
                     children: [
-                      Image.asset(AssetPath.detail1, fit: BoxFit.cover),
-                      Image.asset(AssetPath.detail2, fit: BoxFit.cover),
+                      Positioned.fill(
+                        child: PageView(
+                          controller: pageController,
+                          onPageChanged: (value) {
+                            currentIndex = value;
+                            setState(() {});
+                          },
+                          children: [
+                            Image.asset(AssetPath.detail1, fit: BoxFit.cover),
+                            Image.asset(AssetPath.detail2, fit: BoxFit.cover),
+                          ],
+                        ),
+                      ),
+                      if (currentIndex != 0) ...[
+                        Positioned(
+                          left: 0,
+                          top: 0,
+                          bottom: 0,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  currentIndex--;
+                                  pageController.animateToPage(
+                                    currentIndex,
+                                    duration: const Duration(milliseconds: 200),
+                                    curve: Curves.easeInOut,
+                                  );
+                                },
+                                child: const Padding(
+                                  padding: EdgeInsets.all(10),
+                                  child: Icon(
+                                    Icons.keyboard_arrow_left_rounded,
+                                    size: 40,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                      if (currentIndex != 1) ...[
+                        Positioned(
+                          top: 0,
+                          bottom: 0,
+                          right: 0,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  currentIndex++;
+                                  pageController.animateToPage(
+                                    currentIndex,
+                                    duration: const Duration(milliseconds: 200),
+                                    curve: Curves.easeInOut,
+                                  );
+                                },
+                                child: const Padding(
+                                  padding: EdgeInsets.all(10),
+                                  child: Icon(
+                                    Icons.keyboard_arrow_right_rounded,
+                                    size: 40,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ],
                   ),
                 ),
