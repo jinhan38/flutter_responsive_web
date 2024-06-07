@@ -8,7 +8,6 @@ typedef MyBuilder = Widget Function(
   bool mobile,
 );
 
-const double _webWidth = 1920;
 const double _tabletWidth = 1024;
 const double _mobileWidth = 768;
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_responsive_web/util/my_validation.dart';
 
 class QuestionUtil {
   static final QuestionUtil _singleton = QuestionUtil._();
@@ -40,5 +41,13 @@ class QuestionUtil {
     nameController.dispose();
     emailController.dispose();
     contentController.dispose();
+  }
+
+  bool checkValidation() {
+    if (!MyValidation.isEmail(emailController.text)) return false;
+    if (!MyValidation.questionTitle(titleController.text)) return false;
+    if (!MyValidation.questionName(nameController.text)) return false;
+    if (!MyValidation.questionContent(contentController.text)) return false;
+    return true;
   }
 }

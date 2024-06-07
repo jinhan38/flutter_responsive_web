@@ -5,6 +5,7 @@ import 'package:flutter_responsive_web/screen/company/company_screen.dart';
 import 'package:flutter_responsive_web/screen/portfolio/portfolio_screen.dart';
 import 'package:flutter_responsive_web/screen/question/question_screen.dart';
 import 'package:flutter_responsive_web/screen/recurit/recruit_screen.dart';
+import 'package:flutter_responsive_web/util/my_color.dart';
 import 'package:flutter_responsive_web/util/text_util.dart';
 import 'package:flutter_responsive_web/widgets/custom_constraints.dart';
 
@@ -65,6 +66,22 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
         fontFamily: "pretendard",
         textTheme: TextUtil.setTextTheme(),
+        textButtonTheme: TextButtonThemeData(
+          style: ButtonStyle(
+              foregroundColor: WidgetStateProperty.resolveWith<Color?>(
+            (states) {
+              if (states.contains(WidgetState.disabled)) return Colors.grey;
+              return null;
+            },
+          ), backgroundColor: WidgetStateProperty.resolveWith<Color?>(
+            (states) {
+              if (states.contains(WidgetState.disabled)) {
+                return Colors.grey;
+              }
+              return MyColor.blue40;
+            },
+          )),
+        ),
       ),
       routerDelegate: routerDelegate,
       routeInformationParser: BeamerParser(),
