@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_responsive_web/route_page.dart';
 import 'package:flutter_responsive_web/screen/company/company_screen.dart';
 import 'package:flutter_responsive_web/screen/portfolio/portfolio_screen.dart';
+import 'package:flutter_responsive_web/screen/portfolio_detail/portfolio_detail_screen.dart';
 import 'package:flutter_responsive_web/screen/question/question_screen.dart';
 import 'package:flutter_responsive_web/screen/recurit/recruit_screen.dart';
 import 'package:flutter_responsive_web/util/my_color.dart';
@@ -46,6 +47,12 @@ class MyApp extends StatelessWidget {
               key: ValueKey("question"),
               title: "Question",
               child: QuestionScreen());
+        },
+        RoutePage.portfolioDetail: (context, state, data) {
+          return const BeamPage(
+              key: ValueKey("portfolioDetail"),
+              title: "PortfolioDetail",
+              child: PortfolioDetailScreen());
         },
       },
     ).call,

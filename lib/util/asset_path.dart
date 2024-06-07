@@ -9,4 +9,6 @@ class AssetPath {
   static const flutter = "assets/flutter.jpg";
   static const office = "assets/office.jpg";
   static const office_2 = "assets/office_2.jpg";
+  static const detail1 = "assets/detail_1.jpg";
+  static const detail2 = "assets/detail_2.jpg";
 }
