@@ -4,4 +4,9 @@ class AssetPath {
   static const questionHeaderImage = "assets/question_header_image.png";
   static const recruitHeaderImage = "assets/recruit_header_image.png";
   static const tag = "assets/tag.png";
+  static const bird = "assets/bird.jpg";
+  static const butterfly = "assets/butterfly.jpg";
+  static const flutter = "assets/flutter.jpg";
+  static const office = "assets/office.jpg";
+  static const office_2 = "assets/office_2.jpg";
 }
